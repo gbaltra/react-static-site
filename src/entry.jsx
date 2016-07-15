@@ -3,14 +3,15 @@ var ReactDOM = require('react-dom');
 var ReactDOMServer = require('react-dom/server');
 var Router = require('react-router');
 var routes = require('./Routes.jsx');
+var Root = require('./components/Root.jsx');
 
 var global_locals;
 
 if (typeof document !== 'undefined') {
-  const history = Router.createHistory();
+  const history = Router.browserHistory;
   const outlet = document.getElementById('outlet');
 
-  ReactDOM.render(<Router history={history} routes={routes} />, outlet);
+  ReactDOM.render(<Router.Router history={history} routes={routes}/>, outlet);
 }
 
 function createElement(Component, props) {
@@ -25,7 +26,11 @@ module.exports = function(locals, callback) {
   var location = history.createLocation(locals.path);
 
   Router.match({ routes: routes, location: location }, function(error, redirectLocation, renderProps) {
-    var html = ReactDOMServer.renderToString(<Router.RouterContext {...renderProps} createElement={createElement}/>);
-    callback(null, '<!DOCTYPE html>' + html);
+    var html = ReactDOMServer.renderToString(
+      <Root>
+        <Router.RouterContext {...renderProps} createElement={createElement}/>
+      </Root>
+    )
+    callback(null, html);
   });
-}
+};

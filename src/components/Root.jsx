@@ -1,23 +1,17 @@
 var React = require('react')
-var Router = require('react-router')
-var Header = require('./Header.jsx')
+var Html = require('react-html-document')
 
 var Root = React.createClass({
   render: function () {
+    var scripts = ['bundle.js'];
     return (
-      <html>
-        <head>
-          <title>{this.props.title}</title>
-        </head>
-        <body>
-          <Header />
+      <Html title={this.props.title} scripts={scripts}>
           <div id='outlet'>
             {this.props.children}
           </div>
-        </body>
-      </html>
+      </Html>
     )
   }
-})
+});
 
 module.exports = Root
