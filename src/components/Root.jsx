@@ -15,12 +15,9 @@ var Root = React.createClass({
         </head>
         <body>
           <Header />
-          {this.props.children}
-          <script
-            id='initial-props'
-            type='application/json'
-            dangerouslySetInnerHTML={initialProps} />
-          <script src='bundle.js' />
+          <div id='outlet'>
+            {this.props.children}
+          </div>
         </body>
       </html>
     )

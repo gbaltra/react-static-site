@@ -7,8 +7,10 @@ var routes = require('./Routes.jsx');
 var global_locals;
 
 if (typeof document !== 'undefined') {
-  var initialProps = JSON.parse(document.getElementById('initial-props').innerHTML);
-  ReactDOM.render(<Router history={Router.browserHistory} routes={routes} />, document);
+  const history = Router.createHistory();
+  const outlet = document.getElementById('outlet');
+
+  ReactDOM.render(<Router history={history} routes={routes} />, outlet);
 }
 
 function createElement(Component, props) {
