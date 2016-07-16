@@ -5,11 +5,12 @@ var Index = React.createClass({
   onClick: function(e) {
     e.preventDefault();
     i = i + 1;
+    this.forceUpdate();
   },
   render: function () {
     return (
       <main>
-        { i > 1 ? 'Index component' : 'Not Index' }
+        { i }
         <button type='button' onClick={this.onClick}>Click</button>
       </main>
     )
